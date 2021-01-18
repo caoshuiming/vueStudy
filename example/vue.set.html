@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eleventh</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+<body>
+<h1>vue.set</h1>
+<hr>
+<div id="app">
+    {{count}}
+    <ul>
+        <li v-for="item in arr">{{ item }}</li>
+    </ul>
+    <button @click="btn2Click()">改变数组长度</button>
+</div>
+<p>
+    <button onclick="add()">外部添加</button>
+</p>
+<script type="text/javascript">
+    function add(){
+        // 1.Vue.set改变
+        // Vue.set(outData,'count',2);
+        // 2.用vue对象的方法添加
+        // app.count++;
+        // 3.直接操作外部数据
+        // console.log("我已经执行了")
+        outData.count++;
+        // this.arr[0]="fff"
+        // outData.arr[1]='fff'
+        // app.arr[1]='ddd'
+        Vue.set(app.arr,1,'ddd')
+    }
+    var outData = {
+        count:1,
+        arr:['aaa','bbb','ccc']
+    }
+    var app = new Vue({
+        el:'#app',
+        data:outData,
+        methods:{
+            btn2Click:function (){
+                var arrLen = this.arr.length;
+                console.log(arrLen);
+                // this.arr.length = 5; // 这样下去不行不行
+                Vue.set(this.arr,arrLen,'fff')
+            }
+        }
+    })
+</script>
+</body>
+</html>

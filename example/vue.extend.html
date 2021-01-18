@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ninth</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+<body>
+<h1>vue.extend 扩展实例构造器</h1>
+<hr>
+<!--<web></web>-->
+<div id="web"></div>
+<script type="text/javascript">
+    var webExtend = Vue.extend({
+        template:"<p><a :href='webURL'>{{webName}}</a></p>",
+        data:function (){
+            return{
+                webName:'百度',
+                webURL:'https://www.baidu.com/'
+            }
+        }
+    });
+
+    // 扩展实例构造器是需要挂载的
+    // new webExtend().$mount('web');
+    // 不一定非要自定义标签
+    new webExtend().$mount('#web');
+</script>
+</body>
+</html>
