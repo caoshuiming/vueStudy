@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>propsData</h1>
+    <hr>
+    <header></header>
+    <script type="text/javascript">
+        // 扩展标签header_a
+        var header_a = Vue.extend({
+            template:`<p>{{message}} - {{a}}</p>`,
+            data:function (){
+                return{
+                    // 3.用插值的形式写入模板。{{a}}
+                    message:'Hello, I am header'
+                }
+            },
+            // 1.在全局扩展里加入props进行接收。props:['a']
+            props:['a']
+        });
+        // 用propsData在挂载的时候传递一个值过去，需要三步：
+        // 2.传递时用propsData进行传递。propsData:{a:12}
+        new header_a({
+            propsData:{
+                a:12
+            }
+        }).$mount('header')
+    </script>
+</body>
+</html>

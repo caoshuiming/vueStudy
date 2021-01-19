@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>methods</h1>
+    <hr>
+    <div id="app">
+        <p>{{ num }}</p>
+        <p>
+            <button @click="add(4)">加</button>
+        </p>
+        <p>
+            <button @click="del(2,$event)">减</button>
+        </p>
+        <!-- 用native修饰器来调用构造器里的add方法 -->
+        <p>
+            <btn @click.native="add(3)"></btn>
+        </p>
+    </div>
+
+    <!-- 作用域外部调用构造器里的方法 -->
+    <button onclick="app.add(5)">外部ADD</button>
+
+    <script type="text/javascript">
+        var btn = {
+            template:`<button>组件ADD</button>`
+        }
+        var app = new Vue({
+            el:'#app',
+            data:{
+                num:1
+            },
+            components:{
+                "btn":btn
+            },
+            methods:{
+                add:function (para,$event){
+                    if(para != null){
+                        this.num+=para;
+                    }else{
+                        this.num++;
+                    }
+                },
+                del:function (para,$event){
+                    console.log($event)
+                    if(para != null){
+                        this.num-=para;
+                    }else{
+                        this.num--;
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

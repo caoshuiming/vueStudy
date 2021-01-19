@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+<body>
+<h1>HelloWorld</h1>
+<hr>
+<div id="app">
+    <p>{{price}}</p>
+    <p>{{newPrice}}</p>
+    <ul>
+        <li v-for="item in reverseNews">{{item.title}} - {{item.date}}</li>
+    </ul>
+</div>
+<script type="text/javascript">
+    // 用计算机反转数组 1.没有排序的新闻列表
+    var newsList = [
+        {title:'大熊猫！被吃辣',date:'2020/1/22'},
+        {title:'小白兔！被吃辣',date:'2555/11/5'},
+        {title:'大灰狼！被吃辣',date:'2021/10/1'},
+        {title:'可爱多！被吃辣',date:'1995/8/20'}
+    ]
+    var app = new Vue({
+        el:'#app',
+        data:{
+            price:100,
+            newsList:newsList
+        },
+        // 1.格式化输出结果
+        computed:{
+            newPrice:function (){
+                return '$' + this.price + '元'
+            },
+            // 用js原生方法给数组作了反转
+            reverseNews:function (){
+                return this.newsList.reverse();
+            }
+        }
+    })
+</script>
+</body>
+</html>
