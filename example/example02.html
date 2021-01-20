@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>example methods 02</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+<body>
+<h1>example methods 02</h1>
+<hr>
+<div id="app">
+    {{message}}
+</div>
+<p>
+    <button onclick="destroy()">卸载</button>
+</p>
+<p>
+    <button onclick="reload()">刷新</button>
+</p>
+<p>
+    <button onclick="tick()">更改数据</button>
+</p>
+<script type="text/javascript">
+    var csm = Vue.extend({
+        template:`<P>{{message}}</P>`,
+        data:function (){
+            return{
+                message:'Hello,I am csm!'
+            }
+        },
+        mounted:function (){
+            console.log('执行了mounted')
+        },
+        destroyed:function (){
+            console.log('执行了destroyed')
+        },
+        updated:function (){
+            console.log('执行了updated')
+        }
+    })
+    // 1.用$mount的方法把csm挂载到DOM上
+    var vm = new csm().$mount('#app');
+    // 2.用$destroy()进行卸载
+    function destroy(){
+        vm.$destroy();
+    }
+    // $forceUpdate() 更新
+    function reload(){
+        vm.$forceUpdate();
+    }
+    // $nextTick() 数据修改方法
+    function tick(){
+        vm.message = 'update message info';
+        vm.$nextTick(function (){
+            console.log('message更新完后我被调用了')
+        });
+    }
+</script>
+</body>
+</html>
